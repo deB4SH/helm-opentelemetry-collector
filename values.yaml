@@ -11,8 +11,8 @@ opentelemetry-collector:
         hostMetrics:
             enabled: true
         kubernetesAttributes:
-            enabled: true
+            enabled: false
             extractAllPodLabels: true
             extractAllPodAnnotations: true
         kubeletMetrics:
-            enabled: true
+            enabled: false
