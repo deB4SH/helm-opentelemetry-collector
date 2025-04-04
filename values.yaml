@@ -1,6 +1,12 @@
 opentelemetry-collector:
     mode: "daemonset"
 
+    image:
+        repository: "otel/opentelemetry-collector"
+
+    command:
+        name: "otelcol"
+
     presets:
         hostMetrics:
             enabled: true
