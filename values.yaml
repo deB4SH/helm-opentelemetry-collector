@@ -1,0 +1,12 @@
+opentelemetry-collector:
+    mode: "daemonset"
+
+    presets:
+        hostMetrics:
+            enabled: true
+        kubernetesAttributes:
+            enabled: true
+            extractAllPodLabels: true
+            extractAllPodAnnotations: true
+        kubeletMetrics:
+            enabled: true

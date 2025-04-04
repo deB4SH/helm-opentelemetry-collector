@@ -1,0 +1,8 @@
+apiVersion: v2
+name: opentelemetry-collector
+version: 0.0.1
+description: This Chart deploys opentelemetry-collector with preconfigured values.
+dependencies:
+  - name: opentelemetry-collector
+    version: 0.120.1
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
