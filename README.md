@@ -1,0 +1,2 @@
+# helm-opentelemetry-collector
+
