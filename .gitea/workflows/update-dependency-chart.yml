@@ -1,0 +1,41 @@
+name: update-dependency-chart
+
+on:
+  schedule:
+    - cron: "0 23 * * *"
+
+jobs:
+  package-and-deploy-dev:
+    runs-on: ubuntu-latest
+    container:
+      image: hotbird.docker.nexus.macslabs.de/docker/ci-helm-image:1d2426f
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0 # all history for all branches and tags      
+      - name: Update version of dependency to latest
+        run: |
+          name=$(cat Chart.yaml| yq ".dependencies[0].name" | tr -d "\"")
+          version=$(cat Chart.yaml| yq ".dependencies[0].version" | tr -d "\"")
+          url=$(cat Chart.yaml| yq ".dependencies[0].repository" | tr -d "\"")
+          # log out findings
+          echo "Found following name: $name version: $version url: $url . Adding Helm Repo next: helm repo add $name $url"
+          helm repo add $name $url
+          helm repo update 1 &>/dev/null || true
+          latest_version=$(helm search repo $name --output yaml | yq '.[0].version' | tr -d "\"")
+          # Output
+          echo "Name: $name"
+          echo "Version in Chart.yaml: $version"
+          echo "Latest Version in Repository: $latest_version"
+          # update 
+          echo "Replacing Version with sed: sed -i -e 's/$version/$latest_version/g' Chart.yaml"
+          sed -i -e 's/'$version'/'$latest_version'/g' Chart.yaml
+          cat Chart.yaml
+          # add to git and commit
+          git config user.email service.updater@home.lab
+          git config user.name Service Updater
+          git add Chart.yaml
+          git commit -am 'updated dependency'
+          git push || true
