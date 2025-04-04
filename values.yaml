@@ -6,13 +6,3 @@ opentelemetry-collector:
 
     command:
         name: "otelcol"
-
-    presets:
-        hostMetrics:
-            enabled: true
-        kubernetesAttributes:
-            enabled: false
-            extractAllPodLabels: true
-            extractAllPodAnnotations: true
-        kubeletMetrics:
-            enabled: false
