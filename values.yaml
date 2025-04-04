@@ -2,7 +2,8 @@ opentelemetry-collector:
     mode: "daemonset"
 
     image:
-        repository: "otel/opentelemetry-collector"
+        repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib"
+        tag: "0.123.0"
 
     command:
         name: "otelcol"
