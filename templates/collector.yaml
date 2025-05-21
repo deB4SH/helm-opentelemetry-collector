@@ -7,9 +7,9 @@ spec:
   targetAllocator:
     enabled: true
     image: {{.Values.targetAllocator.image.registry}}:{{.Values.targetAllocator.image.tag}}
+    serviceAccount: {{.Values.targetAllocator.serviceAccountName}}
     prometheusCR:
       enabled: true
-      serviceAccount: {{.Values.targetAllocator.serviceAccountName}}
       podMonitorSelector: {}
       serviceMonitorSelector: {}
   config: {{ .Values.config | toYaml | nindent 4 }}
