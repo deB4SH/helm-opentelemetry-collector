@@ -1,0 +1,15 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: cluster-collector
+spec:
+  mode: statefulset
+  targetAllocator:
+    enabled: true
+    image: {{.Values.targetAllocator.image.registry}}:{{.Values.targetAllocator.image.tag}}
+    prometheusCR:
+      enabled: true
+      serviceAccount: {{.Values.targetAllocator.serviceAccountName}}
+      podMonitorSelector: {}
+      serviceMonitorSelector: {}
+  config: {{- .Values.config | toYaml }}
