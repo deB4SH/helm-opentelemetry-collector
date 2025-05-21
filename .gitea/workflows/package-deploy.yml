@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # all history for all branches and tags      
+          fetch-depth: 0 # all history for all branches and tags
       - name: Get Meta
         id: meta
         run: |
@@ -26,9 +26,9 @@ jobs:
       - name: Append Git Sha to version
         id: append_version
         env:
-          SHORT_SHA: ${{ steps.meta.outputs.SHA_SHORT }}  
+          SHORT_SHA: ${{ steps.meta.outputs.SHA_SHORT }}
         run: |
-          sed -E -i '0,/version:/s/version: ([0-9]+\.?){3}/\0-'$SHORT_SHA'/' Chart.yaml 
+          sed -E -i '0,/version:/s/version: ([0-9]+\.?){3}/\0-'$SHORT_SHA'/' Chart.yaml
           cat Chart.yaml
       - name: Prepare GPG key
         run: |
@@ -77,7 +77,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # all history for all branches and tags      
+          fetch-depth: 0 # all history for all branches and tags
       - name: Get Meta
         id: meta
         run: |
@@ -87,9 +87,9 @@ jobs:
       - name: Append Git Sha to version
         id: append_version
         env:
-          SHORT_SHA: ${{ steps.meta.outputs.SHA_SHORT }}  
+          SHORT_SHA: ${{ steps.meta.outputs.SHA_SHORT }}
         run: |
-          sed -E -i '0,/version:/s/version: ([0-9]+\.?){3}/\0-'$SHORT_SHA'/' Chart.yaml 
+          sed -E -i '0,/version:/s/version: ([0-9]+\.?){3}/\0-'$SHORT_SHA'/' Chart.yaml
           cat Chart.yaml
       - name: Prepare GPG key
         run: |
