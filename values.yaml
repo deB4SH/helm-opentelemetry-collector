@@ -4,6 +4,12 @@ targetAllocator:
         tag: main
     serviceAccountName: otel-ta
 
+additionalVolumes:
+    # - name: varlogpods
+    #   mountPath: /var/log/pods
+    #   readOnly: true
+    #   hostPath: /var/log/pods
+
 config:
     receivers:
         otlp:
